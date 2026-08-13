@@ -38,6 +38,8 @@ coverage/
 
 # Misc
 *.tsbuildinfo
+todos.png
+
 
 # Docker
 docker-compose.override.yml
