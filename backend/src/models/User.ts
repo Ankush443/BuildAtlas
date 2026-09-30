@@ -45,8 +45,6 @@ const userSchema = new Schema<IUser>(
   { timestamps: true }
 );
 
-userSchema.index({ username: 1 });
-userSchema.index({ email: 1 });
 userSchema.index({ name: 'text', bio: 'text' });
 
 userSchema.pre('save', async function (next) {

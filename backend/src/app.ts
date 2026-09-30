@@ -20,6 +20,8 @@ import bookmarksRoutes from './routes/bookmarks.routes';
 import githubRoutes from './routes/github.routes';
 import adminRoutes from './routes/admin.routes';
 import discoverRoutes from './routes/discover.routes';
+import directMessageRoutes from './routes/direct-message.routes';
+import communityRoutes from './routes/community.routes';
 
 initSentry();
 
@@ -43,6 +45,8 @@ app.use('/api/v1/projects', projectsRoutes);
 app.use('/api/v1/technologies', technologiesRoutes);
 app.use('/api/v1/notifications', notificationsRoutes);
 app.use('/api/v1/bookmarks', bookmarksRoutes);
+app.use('/api/v1/direct-messages', directMessageRoutes);
+app.use('/api/v1/community', communityRoutes);
 app.use('/api/v1/github', githubRoutes);
 app.use('/api/v1/admin', adminRoutes);
 app.use('/api/v1/discover', discoverRoutes);

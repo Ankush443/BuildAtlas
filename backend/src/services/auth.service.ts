@@ -29,7 +29,12 @@ export class AuthService {
   }
 
   async refreshToken(token: string) {
-    const decoded = verifyRefreshToken(token);
+    let decoded: { userId: string };
+    try {
+      decoded = verifyRefreshToken(token);
+    } catch {
+      throw new AppError('Invalid refresh token', 401, 'INVALID_REFRESH_TOKEN');
+    }
     const user = await User.findById(decoded.userId).select('+refreshToken');
     if (!user || user.refreshToken !== token) {
       throw new AppError('Invalid refresh token', 401, 'INVALID_REFRESH_TOKEN');

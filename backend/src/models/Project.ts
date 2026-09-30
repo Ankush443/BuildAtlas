@@ -60,7 +60,6 @@ const projectSchema = new Schema<IProject>(
 );
 
 projectSchema.index({ owner: 1 });
-projectSchema.index({ slug: 1 });
 projectSchema.index({ category: 1 });
 projectSchema.index({ projectType: 1 });
 projectSchema.index({ status: 1 });

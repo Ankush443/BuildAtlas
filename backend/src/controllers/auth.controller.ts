@@ -38,6 +38,10 @@ export class AuthController {
   async refreshToken(req: AuthRequest, res: Response, next: NextFunction) {
     try {
       const token = req.cookies.refreshToken || req.body.refreshToken;
+      if (!token) {
+        res.status(401).json({ success: false, error: { code: 'NO_REFRESH_TOKEN', message: 'No refresh token provided' } });
+        return;
+      }
       const result = await authService.refreshToken(token);
       res.cookie('refreshToken', result.refreshToken, { httpOnly: true, secure: true, sameSite: 'strict', maxAge: 7 * 24 * 60 * 60 * 1000 });
       res.json({ success: true, data: { user: result.user, accessToken: result.accessToken }, message: 'Token refreshed' });

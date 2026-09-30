@@ -4,14 +4,14 @@ import { Notification } from '../models/Notification';
 import { AppError } from '../middleware/error.middleware';
 
 export class BookmarkService {
-  async bookmark(userId: string, projectId: string, collection = 'default') {
+  async bookmark(userId: string, projectId: string, collectionName = 'default') {
     const project = await Project.findById(projectId);
     if (!project) throw new AppError('Project not found', 404, 'PROJECT_NOT_FOUND');
 
     const existing = await Bookmark.findOne({ user: userId, project: projectId });
     if (existing) throw new AppError('Already bookmarked', 409, 'ALREADY_BOOKMARKED');
 
-    await Bookmark.create({ user: userId, project: projectId, collection });
+    await Bookmark.create({ user: userId, project: projectId, collectionName });
     await Project.findByIdAndUpdate(projectId, { $inc: { bookmarksCount: 1 } });
 
     if (project.owner.toString() !== userId) {
